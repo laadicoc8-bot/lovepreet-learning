@@ -68,7 +68,7 @@ print(WHITE+'')
 
 COLOR_COMBOS=[['green','yellow'],['magenta','red'],['blue','cyan'],['white','gray'],['red','magenta'],['yellow','green']]
 stein_colors,qe_colors=random.sample(COLOR_COMBOS,2)
-LEO=render('LEVI X      PRADUM',colors=stein_colors,align='center',font='block',background='black')
+LEO=render('LOVEPREET X      PRADUM',colors=stein_colors,align='center',font='block',background='black')
 QE=render('Telegram: @BEASTEREN,@PRADUMPY | Join @LEVIXLOVEPREET,@PRADUMPYTHON\nV5.0 ',colors=qe_colors,align='right',font='console',background='black')
 print(LEO)
 print(QE)
