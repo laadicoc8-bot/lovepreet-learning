@@ -48,7 +48,7 @@ WHITE = '\x1b[1;37m'  # White
 
 
 
-EXPIRE_TIME = '2025-10-05 11:00:00'
+EXPIRE_TIME = '2025-10-06 11:00:00'
 EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
 
 print(WHITE+'')
