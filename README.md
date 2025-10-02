@@ -48,7 +48,7 @@ WHITE = '\x1b[1;37m'  # White
 
 
 
-EXPIRE_TIME = '2025-10-11 11:00:00'
+EXPIRE_TIME = '2025-10-10 11:00:00'
 EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
 
 print(WHITE+'')
@@ -61,14 +61,14 @@ def check_expiration():
 
     remaining_time = expiration_time - current_time 
     days_remaining = remaining_time.days
-    print(f"{WHITE}This tool will expire on 11-OCTOBER{WHITE}")
+    print(f"{WHITE}This tool will expire on 10-OCTOBER{WHITE}")
     print(f"{WHITE}Time remaining until expiration: {days_remaining} days")
 check_expiration()
 print(WHITE+'')
 
 COLOR_COMBOS=[['green','yellow'],['magenta','red'],['blue','cyan'],['white','gray'],['red','magenta'],['yellow','green']]
 stein_colors,qe_colors=random.sample(COLOR_COMBOS,2)
-LEO=render('LOVEPREET X      PRADUM',colors=stein_colors,align='center',font='block',background='black')
+LEO=render('LEVI X      PRADUM',colors=stein_colors,align='center',font='block',background='black')
 QE=render('Telegram: @BEASTEREN,@PRADUMPY | Join @LEVIXLOVEPREET,@PRADUMPYTHON\nV5.0 ',colors=qe_colors,align='right',font='console',background='black')
 print(LEO)
 print(QE)
