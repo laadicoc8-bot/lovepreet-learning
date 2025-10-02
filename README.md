@@ -48,7 +48,7 @@ WHITE = '\x1b[1;37m'  # White
 
 
 
-EXPIRE_TIME = '2025-10-10 11:00:00'
+EXPIRE_TIME = '2025-10-11 11:00:00'
 EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
 
 print(WHITE+'')
@@ -61,7 +61,7 @@ def check_expiration():
 
     remaining_time = expiration_time - current_time 
     days_remaining = remaining_time.days
-    print(f"{WHITE}This tool will expire on 10-OCTOBER{WHITE}")
+    print(f"{WHITE}This tool will expire on 11-OCTOBER{WHITE}")
     print(f"{WHITE}Time remaining until expiration: {days_remaining} days")
 check_expiration()
 print(WHITE+'')
