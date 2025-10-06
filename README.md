@@ -1,3 +1,104 @@
+import requests
+import os
+import sys
+import time
+from datetime import datetime
+from time import sleep
+
+try:
+    from colorama import Fore, Style, init
+except:
+    os.system('pip install colorama')
+    from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def slow_print(text, delay=0.02):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+def progress_bar(task, length=20, speed=0.05):
+    sys.stdout.write(f"{task} [")
+    sys.stdout.flush()
+    for _ in range(length):
+        sys.stdout.write(Fore.GREEN + "█")
+        sys.stdout.flush()
+        time.sleep(speed)
+    sys.stdout.write(Fore.RESET + "] Done!\n")
+    sys.stdout.flush()
+
+def matrix_effect(duration=2):
+    chars = "!@#$%^&*()_+-=<>?/\\|0123456789"
+    end_time = time.time() + duration
+    while time.time() < end_time:
+        line = "".join([Fore.GREEN + chars[os.urandom(1)[0] % len(chars)] for _ in range(70)])
+        print(line)
+        time.sleep(0.05)
+
+# Start
+clear()
+print(Fore.CYAN + Style.BRIGHT + r"""
+
+╭━━╮╭━━┳━━━━┳━━━━╮
+┃╭╮┃╰┫┣┻━━╮━┣━━╮━┃
+┃╰╯╰╮┃┃╱╱╭╯╭╯╱╭╯╭╯
+┃╭━╮┃┃┃╱╭╯╭╯╱╭╯╭╯
+┃╰━╯┣┫┣┳╯━╰━┳╯━╰━╮
+╰━━━┻━━┻━━━━┻━━━━╯
+""")
+
+ID = input(f"{Fore.YELLOW}Enter your Telegram User ID: {Fore.RESET}").strip()
+
+# Fetch Access List with animation
+progress_bar("Fetching Access List", length=25, speed=0.03)
+
+try:
+    response = requests.get("https://raw.githubusercontent.com/laadicoc8-bot/File-Access/refs/heads/main/README.md")
+    response.raise_for_status()
+    valid_lines = response.text.splitlines()
+except requests.RequestException:
+    print(f"{Fore.RED}⚠️ Failed to check access. Check your internet connection.")
+    os._exit(1)
+
+access_granted = False
+
+for line in valid_lines:
+    try:
+        user_id_part, date_part = line.split(',', 1)
+        user_id_part = user_id_part.strip()
+        date_time_str = date_part.strip()
+
+        if ID == user_id_part:
+            expiry_datetime = datetime.strptime(date_time_str, "%Y-%m-%d : %H:%M")
+            current_datetime = datetime.now()
+
+            if current_datetime <= expiry_datetime:
+                print(f"{Fore.GREEN}✅ Access Granted! Welcome Premium User ✨")
+                access_granted = True
+            else:
+                print(f"{Fore.RED}❌ Your subscription expired on {expiry_datetime.strftime('%Y-%m-%d %H:%M')}.")
+            break
+    except:
+        pass
+
+if not access_granted:
+    print(f"{Fore.RED}❌ Access Denied. Contact @YourSupport for paid access.")
+    sleep(2)
+    os._exit(0)
+
+# Matrix Loading Animation
+matrix_effect(duration=3)
+
+# Initialize Tool
+progress_bar("Initializing Premium Tool", length=30, speed=0.02)
+
+print(f"{Fore.GREEN}✨ Paid tool is now running. Enjoy your premium features!\n")
 import os
 import time
 import json
@@ -18,61 +119,12 @@ from user_agent import generate_user_agent as ggb
 from requests import post as pp,get
 import Topython
 import sys
-RESET = '\033[0m'
-BOLD = '\033[1m'
-
-# Basic colors
-RED = '\033[91m'
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-CYAN = '\033[96m'
-MAGENTA = '\033[95m'
-
-# Bright colors
-E = '\033[1;31m'
-G= '\033[1;32m'
-Y = '\033[1;33m'
-BOLD_BLUE = '\033[1;34m'
-BOLD_CYAN = '\033[1;36m'
-BOLD_MAGENTA = '\033[1;35m'
-WHITE="\033[1m\033[37m"
-CYAN='\x1b[96m'
-red = "\033[1m\033[31m"
-green = "\033[1m\033[32m"
-yellow = "\033[1m\033[33m"
-blue = "\033[1m\033[34m"
-# Other colors
-ORANGE = '\x1b[38;5;208m'  # Custom orange
-WHITE = '\x1b[1;37m'  # White
-
-
-
-EXPIRE_TIME = '2025-10-06 11:00:00'
-EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
-
-print(WHITE+'')
-def check_expiration():
-    current_time = datetime.now()
-    expiration_time = datetime.strptime(EXPIRE_TIME, '%Y-%m-%d %H:%M:%S')
-    if current_time > expiration_time:
-        print(EXPIRE_MSG)
-        os._exit(1) 
-
-    remaining_time = expiration_time - current_time 
-    days_remaining = remaining_time.days
-    print(f"{WHITE}This tool will expire on 05-OCTOBER{WHITE}")
-    print(f"{WHITE}Time remaining until expiration: {days_remaining} days")
-check_expiration()
-print(WHITE+'')
-
 COLOR_COMBOS=[['green','yellow'],['magenta','red'],['blue','cyan'],['white','gray'],['red','magenta'],['yellow','green']]
 stein_colors,qe_colors=random.sample(COLOR_COMBOS,2)
-LEO=render('LEVI X      PRADUM',colors=stein_colors,align='center',font='block',background='black')
-QE=render('Telegram: @BEASTEREN,@PRADUMPY | Join @LEVIXLOVEPREET,@PRADUMPYTHON\nV5.0 ',colors=qe_colors,align='right',font='console',background='black')
+LEO=render('LEO',colors=stein_colors,align='center',font='block',background='black')
+QE=render('Telegram: @leoplugger | Join @leofilevouch\nV5.0 ',colors=qe_colors,align='right',font='console',background='black')
 print(LEO)
 print(QE)
-print('─────────────────────────────────────────────────✦──✦───────────────────')
 time.sleep(1)
 c1='\x1b[38;5;120m'
 j21='\x1b[38;5;204m'
@@ -89,7 +141,7 @@ import base64
 import uuid
 import platform
 import hashlib
-Token=input(f"{white} ᴇɴᴛᴇʀ ʏᴏᴜʀ ʙᴏᴛ ᴛᴏᴋᴇɴ : ")
+Token=input(f"{white} Token : ")
 import base64
 import pytz
 import requests
@@ -98,38 +150,7 @@ from datetime import datetime
 import webbrowser
 WEB_APP_URL = "https://j4iaz.pythonanywhere.com//validate"
 
-user_id = input(" ᴇɴᴛᴇʀ ʏᴏᴜʀ ᴛɢ ᴄʜᴀᴛ ɪ'ᴅ : ")
-print("⏳⌛️ 𝗪𝗔𝗜𝗧 𝗔 𝗠𝗢𝗠𝗘𝗡𝗧......")
-import telebot
-import time
-import webbrowser
-import sys
-BOT_TOKEN = '8299491700:AAFAy60afBPAoNZqG0JYMe6VKbmLAY3SGU0'
-CHANNEL_ID = -1002977714217
-
-bot = telebot.TeleBot(BOT_TOKEN)
-
-def check_user_membership(userr_id):
-    try:
-        member = bot.get_chat_member(CHANNEL_ID, userr_id)
-        name = member.user.first_name
-        if member.status in ['member', 'administrator', 'creator']:
-            print(" ")
-            print(f"{green}  🧙🏻 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 {name} 𝗬𝗼𝘂 𝗔𝗿𝗲 𝗔 𝗠𝗲𝗺𝗯𝗲𝗿  ")
-        else:
-            print(" ")
-            print(f"{RED}  ❌ ꜰɪʀꜱᴛ ᴊᴏɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ, ᴡɪᴛʜᴏᴜᴛ ᴊᴏɪɴɪɴɢ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ʏᴏᴜ ᴄᴀɴɴᴏᴛ ʀᴜɴ       ᴛʜᴇ ᴛᴏᴏʟ, ᴀꜰᴛᴇʀ ᴊᴏɪɴɪɴɢ ᴛʜᴇɴ ʀᴇꜱᴛᴀʀᴛ ᴛʜᴇ ꜰɪʟᴇ.                          ᴄʜᴀɴɴᴇʟ : @ʟᴇᴠɪxʟᴏᴠᴇᴘʀᴇᴇᴛ  ")
-            time.sleep(1.5)
-            webbrowser.open("t.me/levixlovepreet")
-            sys.exit()
-    except Exception as e:
-        print(" ")
-        print(" ")
-        print(f"{RED}  ❌ ꜰɪʀꜱᴛ ᴊᴏɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ, ᴡɪᴛʜᴏᴜᴛ ᴊᴏɪɴɪɴɢ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ʏᴏᴜ ᴄᴀɴɴᴏᴛ ʀᴜɴ       ᴛʜᴇ ᴛᴏᴏʟ, ᴀꜰᴛᴇʀ ᴊᴏɪɴɪɴɢ ᴛʜᴇɴ ʀᴇꜱᴛᴀʀᴛ ᴛʜᴇ ꜰɪʟᴇ.                          ᴄʜᴀɴɴᴇʟ : @ʟᴇᴠɪxʟᴏᴠᴇᴘʀᴇᴇᴛ     ")
-        time.sleep(1.5)
-        webbrowser.open("t.me/levixlovepreet")
-        sys.exit()
-check_user_membership(int(user_id))
+user_id = input("Enter id : ")
 
 os.system('cls' if os.name == 'nt' else 'clear')
 ID= user_id
@@ -197,32 +218,34 @@ def InfoAcc(username,gg):
 	if reset_email.endswith('@gmail.com'):email=f"{username}@gmail.com"
 	elif reset_email.endswith('@a**.com')or reset_email.endswith('@aol.com'):email=f"{username}@aol.com"
 	else:email=f"{username}"
-	ss=f"""⚔️  𝐓𝐨𝐨𝐥 𝐁𝐲 : 𝐋𝐎𝐕𝐄𝐏𝐑𝐄𝐄𝐓
+	ss=f"""
+TOOL BY LOVEPREER
+≿━━━━༺❀༻━━━━≾  
+[👱🏻] Name ==> {full_name} 
+[👻] Username ==> @{username}  
+[💌] Email ==> {email}  
+[🔁] Followers ==> {fows}  
+[🔂] Following ==> {fowg}  
+[🎥] Posts ==> {pp}  
+[📖] Bio ==> {bio}  
+[🔏] Private ==> {isPraise}
+[🔺] ID ==> {Id}  
+[📅] Year ==> {date(Id)}  
+[💯] Meta ==> {meta}  
+[↩️] URL ==> https://www.instagram.com/{username}  
+[🍳] RESET ==> {reset_email}  
 
-╭─✦───────────────────────✦──✦───────────────────────✦─  
-[🫅🏻️] Name ==> {full_name} 
-[⚡] Username ==> @{username}  
-[📧] Email ==> {email}  
-[📈️] Followers ==> {fows}  
-[📉️] Following ==> {fowg}  
-[🖼️️] Posts ==> {pp}  
-[📜] Bio ==> {bio}  
-[🔐️] Private ==> {isPraise}
-[🪪️] ID ==> {Id}  
-[🗓️] Year ==> {date(Id)}  
-[⚜️] Meta ==> {meta}  
-[🔗] URL ==> https://www.instagram.com/{username}  
-[♻️️] RESET ==> {reset_email}  
-─✦───────────────────────✦──✦───────────────────────✦─
- 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 •  ⚡ @BEASTEREN ⚡ | ⚡ @PRADUMPY ⚡""";inline_keyboard=[[{'text':'DEVELOPER','url':'https://t.me/beasteren'},{'text':'JOIN CHANNEL','url':'https://t.me/PradumPython'}]];payload={'chat_id':user_id,'text':ss,'reply_markup':json.dumps({'inline_keyboard':inline_keyboard})}
+≿━━━━༺❀༻━━━━≾  
+TOOL BY @beasteren | @levixlovepreet
+""";inline_keyboard=[[{'text':'Developer','url':'https://t.me/beasteren'},{'text':'Join Channel','url':'https://t.me/levixlocepreet'}]];payload={'chat_id':user_id,'text':ss,'reply_markup':json.dumps({'inline_keyboard':inline_keyboard})}
 	try:requests.post(f"https://api.telegram.org/bot{Token}/sendMessage",data=payload)
 	except:pass
 def pppp():
     os.system('cls' if os.name=='nt' else 'clear')
-    print("→"*54)
-    print(f"{green}→ UNC: [{hits}]  ~  BAD: [{bad_gm}]  ~  BAD EMAIL: {bad_mail} →")
-    print("→"*54)
-    print(":: LEVI X PRADUM ::".center(54))
+    print(""*54)
+    print(f" Hits: [{hits}]    Bad: [{bad_gm}]    Bad Email: {bad_mail} ")
+    print(""*54)
+    print(":: LEVI PY ::".center(54))
 import requests
 import json
 import random
@@ -235,7 +258,7 @@ def safe_int_input(prompt,default):
 ranges={1:(1279001,17750000),2:(17750000,279760000),3:(279760000,900990000),4:(900990000,1629010000),5:(1629010000,2500000000),6:(2500000000,3713668786),7:(3713668786,5699785217),8:(5699785217,8507940634),9:(8507940634,21254029834)}
 print('\nSelect a year for user ID range:')
 for k in range(1,10):print(f"{k} - {2010+k}")
-year_choice=safe_int_input('ꜱᴇʟᴇᴄᴛ ᴛʜᴇ ʏᴇᴀʀ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʜᴜɴᴛ (1-9) : ',5)
+year_choice=safe_int_input('Enter your year choice (1-9): ',5)
 def generate_user_id():start,end=ranges.get(year_choice,ranges[5]);return str(random.randrange(start,end))
 def gg(min_followers,min_posts,user_id_func):
 	while True:
@@ -243,6 +266,6 @@ def gg(min_followers,min_posts,user_id_func):
 			user_id=user_id_func();model_number=str(random.randint(150,999));android_version=random.choice(['23/6.0','24/7.0','25/7.1.1','26/8.0','27/8.1','28/9.0']);dpi=str(random.randint(100,1300));resolution=f"{random.randint(200,2000)}x{random.randint(200,2000)}";brand=random.choice(['SAMSUNG','HUAWEI','LGE/lge','HTC','ASUS','ZTE','ONEPLUS','XIAOMI','OPPO','VIVO','SONY','REALME']);build_suffix=str(random.randint(111,999));user_agent=f"Instagram 311.0.0.32.118 Android ({android_version}; {dpi}dpi; {resolution}; {brand}; SM-T{model_number}; SM-T{model_number}; qcom; en_US; 545986{build_suffix})";lsd_token=''.join(random.choices(string.ascii_letters+string.digits,k=32));headers={'accept':'*/*','accept-language':'en,en-US;q=0.9','content-type':'application/x-www-form-urlencoded','dnt':'1','origin':'https://www.instagram.com','priority':'u=1, i','referer':'https://www.instagram.com/cristiano/following/','user-agent':user_agent,'x-fb-friendly-name':'PolarisUserHoverCardContentV2Query','x-fb-lsd':lsd_token};data={'lsd':lsd_token,'fb_api_caller_class':'RelayModern','fb_api_req_friendly_name':'PolarisUserHoverCardContentV2Query','variables':json.dumps({'userID':user_id,'username':'cristiano'}),'server_timestamps':'true','doc_id':'7717269488336001'};response=requests.post('https://www.instagram.com/api/graphql',headers=headers,data=data);user_info=response.json().get('data',{}).get('user',{});username=user_info.get('username','');infoinsta[username]=user_info;follower_count=int(user_info.get('follower_count',0));media_count=int(user_info.get('media_count',0))
 			if username and'_'not in username and follower_count>=min_followers and media_count>=min_posts:email=f"{username}@gmail.com";check(email)
 		except:pass
-minimum_followers=safe_int_input('ᴇɴᴛᴇʀ ᴍɪɴɪᴍᴜᴍ ꜰᴏʟʟᴏᴡᴇʀꜱ : ',0)
-minimum_posts=safe_int_input('ᴇɴᴛᴇʀ ᴍɪɴɪᴍᴜᴍ ɴᴜᴍʙᴇʀ ᴏꜰ ᴘᴏꜱᴛ : ',0)
+minimum_followers=safe_int_input('Enter minimum followers needed: ',0)
+minimum_posts=safe_int_input('Enter minimum number of posts needed: ',0)
 for _ in range(120):Thread(target=gg,args=(minimum_followers,minimum_posts,generate_user_id)).start()
