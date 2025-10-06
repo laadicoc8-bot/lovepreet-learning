@@ -59,7 +59,7 @@ ID = input(f"{Fore.YELLOW}Enter your Telegram User ID: {Fore.RESET}").strip()
 progress_bar("Fetching Access List", length=25, speed=0.03)
 
 try:
-    response = requests.get("https://raw.githubusercontent.com/laadicoc8-bot/File-Access/refs/heads/main/README.md")
+    response = requests.get("https://raw.githubusercontent.com/laadicoc8-bot/Xiroportal/refs/heads/main/README.md")
     response.raise_for_status()
     valid_lines = response.text.splitlines()
 except requests.RequestException:
