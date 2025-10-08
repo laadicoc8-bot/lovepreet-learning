@@ -1,106 +1,3 @@
-#------------#LOVEPREET--------------#
-import requests
-import os
-import sys
-import time
-from datetime import datetime
-from time import sleep
-R = "\033[1;31m"
-G = "\033[1;32m"
-B = "\033[1;34m"
-Y = "\033[1;33m"
-C = "\033[1;36m"
-M = "\033[1;35m"
-reset = "\033[0m"
-try:
-    from colorama import Fore, Style, init
-except:
-    os.system('pip install colorama')
-    from colorama import Fore, Style, init
-
-init(autoreset=True)
-
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def slow_print(text, delay=0.02):
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()
-
-def progress_bar(task, length=20, speed=0.05):
-    sys.stdout.write(f"{task} [")
-    sys.stdout.flush()
-    for _ in range(length):
-        sys.stdout.write(Fore.GREEN + "█")
-        sys.stdout.flush()
-        time.sleep(speed)
-    sys.stdout.write(Fore.RESET + "] Done!\n")
-    sys.stdout.flush()
-
-def matrix_effect(duration=2):
-    chars = "!@#$%^&*()_+-=<>?/\\|0123456789"
-    end_time = time.time() + duration
-    while time.time() < end_time:
-        line = "".join([Fore.GREEN + chars[os.urandom(1)[0] % len(chars)] for _ in range(70)])
-        print(line)
-        time.sleep(0.05)
-
-# Start
-clear()
-print(Fore.CYAN + Style.BRIGHT + r"""
-""")
-print('⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘')
-print(f"{M}               🧑🏻‍💻 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐓𝐨 𝐋𝐎𝐕𝐄𝐏𝐑𝐄𝐄𝐓 𝐀𝐜𝐜𝐞𝐬𝐬 𝐂𝐡𝐞𝐜𝐤𝐞𝐫")
-print('⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘')
-ID = input(f"{Y}𝐄𝐧𝐭𝐞𝐫 𝐘𝐨𝐮𝐫 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐔𝐬𝐞𝐫 𝐈'𝐝 :")
-
-# Fetch Access List with animation
-progress_bar(f"{Y}Fetching Access List", length=25, speed=0.03)
-
-try:
-    response = requests.get("https://raw.githubusercontent.com/laadicoc8-bot/Xiroportal/refs/heads/main/README.md")
-    response.raise_for_status()
-    valid_lines = response.text.splitlines()
-except requests.RequestException:
-    print(f"{Fore.RED}⚠️ Failed to check access. Check your internet connection.")
-    os._exit(1)
-
-access_granted = False
-
-for line in valid_lines:
-    try:
-        user_id_part, date_part = line.split(',', 1)
-        user_id_part = user_id_part.strip()
-        date_time_str = date_part.strip()
-
-        if ID == user_id_part:
-            expiry_datetime = datetime.strptime(date_time_str, "%Y-%m-%d : %H:%M")
-            current_datetime = datetime.now()
-
-            if current_datetime <= expiry_datetime:
-                print(f"{Fore.GREEN}✅ 𝐀𝐜𝐜𝐞𝐬𝐬 𝐆𝐫𝐚𝐧𝐭𝐞𝐝! 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐔𝐬𝐞𝐫 ✨")
-                access_granted = True
-            else:
-                print(f"{Fore.RED} 𝐘𝐨𝐮𝐫 𝐒𝐮𝐛𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧 𝐄𝐱𝐩𝐢𝐫𝐞𝐝 𝐎𝐧 {expiry_datetime.strftime('%Y-%m-%d %H:%M')}.")
-            break
-    except:
-        pass
-
-if not access_granted:
-    print(f"{Fore.RED}🚫 𝐀𝐜𝐜𝐞𝐬𝐬 𝐃𝐞𝐧𝐢𝐞𝐝 𝐂𝐨𝐧𝐭𝐚𝐜𝐭 @𝐁𝐞𝐚𝐬𝐭𝐞𝐫𝐞𝐧 𝐅𝐨𝐫 𝐏𝐚𝐢𝐝 𝐀𝐜𝐜𝐞𝐬𝐬")
-    sleep(2)
-    os._exit(0)
-
-# Matrix Loading Animation
-matrix_effect(duration=3)
-
-# Initialize Tool
-progress_bar("Initializing Premium Tool", length=30, speed=0.02)
-
-print(f"{Fore.GREEN}✨ Paid tool is now running. Enjoy your premium features!\n")
 import os
 import time
 import json
@@ -148,6 +45,26 @@ blue = "\033[1m\033[34m"
 # Other colors
 ORANGE = '\x1b[38;5;208m'  # Custom orange
 WHITE = '\x1b[1;37m'  # White
+
+
+
+EXPIRE_TIME = '2025-10-10 11:00:00'
+EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
+
+print(WHITE+'')
+def check_expiration():
+    current_time = datetime.now()
+    expiration_time = datetime.strptime(EXPIRE_TIME, '%Y-%m-%d %H:%M:%S')
+    if current_time > expiration_time:
+        print(EXPIRE_MSG)
+        os._exit(1) 
+
+    remaining_time = expiration_time - current_time 
+    days_remaining = remaining_time.days
+    print(f"{WHITE}This tool will expire on 10-OCTOBER{WHITE}")
+    print(f"{WHITE}Time remaining until expiration: {days_remaining} days")
+check_expiration()
+print(WHITE+'')
 COLOR_COMBOS=[['green','yellow'],['blue','cyan'],['green','white']]
 stein_colors,qe_colors=random.sample(COLOR_COMBOS,2)
 LEVI=render(' LEVI X    STEIN',colors=stein_colors,align='center',font='block',background='black')
