@@ -46,25 +46,6 @@ blue = "\033[1m\033[34m"
 ORANGE = '\x1b[38;5;208m'  # Custom orange
 WHITE = '\x1b[1;37m'  # White
 
-
-
-EXPIRE_TIME = '2025-10-11 11:00:00'
-EXPIRE_MSG = RED+'File stopped. Contact @BEASTEREN '
-
-print(WHITE+'')
-def check_expiration():
-    current_time = datetime.now()
-    expiration_time = datetime.strptime(EXPIRE_TIME, '%Y-%m-%d %H:%M:%S')
-    if current_time > expiration_time:
-        print(EXPIRE_MSG)
-        os._exit(1) 
-
-    remaining_time = expiration_time - current_time 
-    days_remaining = remaining_time.days
-    print(f"{WHITE}This tool will expire on 11-OCTOBER{WHITE}")
-    print(f"{WHITE}Time remaining until expiration: {days_remaining} days")
-check_expiration()
-print(WHITE+'')
 COLOR_COMBOS=[['green','yellow'],['blue','cyan'],['green','white']]
 stein_colors,qe_colors=random.sample(COLOR_COMBOS,2)
 LEVI=render(' LEVI X    STEIN',colors=stein_colors,align='center',font='block',background='black')
